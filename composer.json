@@ -1,0 +1,55 @@
+{
+    "name": "pnuggz/laravel-restricted-url",
+    "description": "Laravel restricted URL",
+    "keywords": [
+        "pnuggz",
+        "laravel-restricted-url"
+    ],
+    "homepage": "https://github.com/pnuggz/laravel-restricted-url",
+    "license": "MIT",
+    "type": "package",
+    "authors": [
+        {
+            "name": "Ryan Nugraha",
+            "email": "pnugraha89@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "illuminate/support": "^8.32",
+        "webpatser/laravel-uuid": "^3.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.13",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pnuggz\\LaravelRestrictedUrl\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pnuggz\\LaravelRestrictedUrl\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pnuggz\\LaravelRestrictedUrl\\Providers\\RestrictedUrlServiceProvider"
+            ],
+            "aliases": {
+                "RestrictedUrlService": "Pnuggz\\LaravelRestrictedUrl\\Facades\\RestrictedUrlService"
+            }
+        }
+    }
+}
