@@ -5,6 +5,7 @@ namespace Pnuggz\LaravelRestrictedUrl\Providers;
 use Pnuggz\LaravelRestrictedUrl\ServiceRepository\Services\RestrictedUrlService;
 use Pnuggz\LaravelRestrictedUrl\Traits\ServiceRepoDependencyInjectionTrait;
 use Illuminate\Support\ServiceProvider;
+use Pnuggz\LaravelRestrictedUrl\Http\Middlewares\ValidateRestrictedUrl;
 
 class RestrictedUrlServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,7 @@ class RestrictedUrlServiceProvider extends ServiceProvider
          */
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
-        // app('router')->aliasMiddleware('validateLimitedUseSignedUrl', ValidateLimitedUseSignedUrl::class);
+        app('router')->aliasMiddleware('ValidateRestrictedUrl', ValidateRestrictedUrl::class);
 
         $this->publishes([
             __DIR__ .  '/../../config/config.php' => config_path('laravel_restricted_url.php'),

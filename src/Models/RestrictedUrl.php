@@ -21,10 +21,12 @@ class RestrictedUrl extends BaseModel
         'expires_at',
         'access_limit',
         'access_count',
-        'first_accessed_by_ip', 
+        'first_accessed_by_ip',
+        'first_accessed_by_user_id',
         'first_accessed_at',
         'last_reaccessed_at',
         'last_reaccessed_by_ip',
+        'last_reaccessed_by_user_id',
         'created_by_user_id',
     ];
 

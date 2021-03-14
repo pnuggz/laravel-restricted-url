@@ -16,9 +16,4 @@ class RestrictedUrlTest extends BaseTestCase {
     {
         $this->assertInstanceOf(RestrictedUrl::class, new RestrictedUrl());
     }
-
-    public function testDatabase(): void
-    {
-        dd(RestrictedUrl::all());
-    }
 }

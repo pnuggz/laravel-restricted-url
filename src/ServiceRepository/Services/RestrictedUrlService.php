@@ -6,6 +6,8 @@ use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\MessageBag;
+use Pnuggz\LaravelRestrictedUrl\Models\BaseModel;
+use Pnuggz\LaravelRestrictedUrl\Models\RestrictedUrl;
 use Pnuggz\LaravelRestrictedUrl\ServiceRepository\Repositories\RestrictedUrlRepo;
 use Webpatser\Uuid\Uuid;
 
@@ -45,6 +47,35 @@ class RestrictedUrlService
         ];
 
         return $this->restricted_url_repo->insert($parsed_data);
+    }
+
+    public function getRestrictedUrlByKey($key)
+    {
+        return $this->restricted_url_repo->getByKey($key);
+    }
+
+    public function setRestrictedUrlAccessCountWithUser(RestrictedUrl $restricted_url, $user_id, $ip = null)
+    {
+        $data = [
+            'access_count'               => $restricted_url->access_count + 1,
+            'last_reaccessed_by_ip'      => $ip,
+            'last_reaccessed_by_user_id' => $user_id,
+            'last_reaccessed_at'         => CarbonImmutable::now()->tz('utc')->format(BaseModel::STORAGE_DATE_TIME_FORMAT),
+        ];
+
+        if (!$restricted_url->first_accessed_by_ip)
+        {
+            Arr::set($data, 'first_accessed_by_ip', $ip);
+            Arr::set($data, 'first_accessed_by_user_id', $user_id);
+            Arr::set($data, 'first_accessed_at', CarbonImmutable::now()->tz('utc')->format(BaseModel::STORAGE_DATE_TIME_FORMAT));
+        }
+
+        return $this->restricted_url_repo->updateByRestrictedUrl($restricted_url, $data);
+    }
+
+    public function updateRestrictedUrl(RestrictedUrl $restricted_url, $data)
+    {
+        return $this->restricted_url_repo->updateByRestrictedUrl($restricted_url, $data);
     }
 
     public function validateRouteNameExists($data)

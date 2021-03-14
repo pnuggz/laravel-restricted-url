@@ -22,8 +22,10 @@ class CreateRestrictedUrlsTable extends Migration
             $table->integer('access_limit')->nullable()->default(2);
             $table->integer('access_count')->default(0);
             $table->ipAddress('first_accessed_by_ip')->nullable();
+            $table->bigInteger('first_accessed_by_user_id')->unsigned()->nullable();
             $table->dateTime('first_accessed_at')->nullable();
             $table->ipAddress('last_reaccessed_by_ip')->nullable();
+            $table->bigInteger('last_reaccessed_by_user_id')->unsigned()->nullable();
             $table->dateTime('last_reaccessed_at')->nullable();
             $table->bigInteger('created_by_user_id')->unsigned();
             $table->timestamps();

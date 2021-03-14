@@ -42,6 +42,24 @@ class RestrictedUrlRepo
         return $create_response;
     }
 
+    public function getByKey($key)
+    {
+        return $this->restricted_url_entity->where('key', $key)
+            ->first();
+    }
+
+    public function updateByRestrictedUrl(RestrictedUrl $restricted_url, $data)
+    {
+        $response = $restricted_url->update($data);
+        if (!$response) {
+            return (new MessageBag())->add(
+                'restricted_url_update_fail', 
+                'Unable to update the restricted url. Please try again.'
+            ); 
+        }
+        return true;
+    }
+
     private function cleanupExistingRestrictedUrls($data)
     {
         $now = CarbonImmutable::now();
