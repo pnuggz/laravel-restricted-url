@@ -68,8 +68,8 @@ class RestrictedUrlRepo
             ->where('user_id', Arr::get($data, 'user_id'))
             ->where('route_name', Arr::get($data, 'route_name'))
             ->where(function($q) use ($now) {
-                $q->where('access_count', '>', 'access_limit')
-                    ->orWhere($now->format(BaseModel::STORAGE_DATE_TIME_FORMAT), '>', 'expires_at');
+                $q->whereRaw('access_count > access_limit')
+                    ->orWhere('expires_at', '<', $now->format(BaseModel::STORAGE_DATE_TIME_FORMAT));
             })
             ->get();
 
