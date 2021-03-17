@@ -17,7 +17,7 @@ class CreateRestrictedUrlsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->string('route_name');
-            $table->string('key');
+            $table->string('route_key');
             $table->dateTime('expires_at')->nullable();
             $table->integer('access_limit')->nullable()->default(2);
             $table->integer('access_count')->default(0);

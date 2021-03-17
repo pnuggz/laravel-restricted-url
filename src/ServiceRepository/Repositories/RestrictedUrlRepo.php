@@ -44,7 +44,7 @@ class RestrictedUrlRepo
 
     public function getByKey($key)
     {
-        return $this->restricted_url_entity->where('key', $key)
+        return $this->restricted_url_entity->where('route_key', $key)
             ->first();
     }
 

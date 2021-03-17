@@ -41,7 +41,7 @@ class RestrictedUrlService
             'user_id'            => $user->id,
             'created_by_user_id' => $user->id,
             'route_name'         => Arr::get($data, 'route_name'),
-            'key'                => $this->generateUniqueKey(),
+            'route_key'          => $this->generateUniqueKey(),
             'expires_at'         => CarbonImmutable::now()->addSeconds($expiry_in_seconds),
             'access_limit'       => $access_limit,
         ];

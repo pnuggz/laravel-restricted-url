@@ -79,7 +79,7 @@ class ValidateRestrictedUrlTest extends BaseTestCase
     public function testRestrictedUrlIssetNoUserFail(): void
     {
         $restricted_url = $this->createRestrictedUrl();
-        $key            = $restricted_url->key;
+        $key            = $restricted_url->route_key;
 
         $this->request->merge([
             'restricted_url_key' => $key,
@@ -96,7 +96,7 @@ class ValidateRestrictedUrlTest extends BaseTestCase
     public function testRestrictedUrlExpiredFail(): void
     {
         $restricted_url = $this->createRestrictedUrl();
-        $key            = $restricted_url->key;
+        $key            = $restricted_url->route_key;
 
         RestrictedUrlService::updateRestrictedUrl(
             $restricted_url,
@@ -123,7 +123,7 @@ class ValidateRestrictedUrlTest extends BaseTestCase
     public function testRestrictedUrlExceedLimitFail(): void
     {
         $restricted_url = $this->createRestrictedUrl();
-        $key            = $restricted_url->key;
+        $key            = $restricted_url->route_key;
 
         RestrictedUrlService::updateRestrictedUrl(
             $restricted_url,
@@ -150,7 +150,7 @@ class ValidateRestrictedUrlTest extends BaseTestCase
     public function testRestrictedUrlSucceeds(): void
     {
         $restricted_url                      = $this->createRestrictedUrl();
-        $key                                 = $restricted_url->key;
+        $key                                 = $restricted_url->route_key;
         $restricted_url_initial_access_count = $restricted_url->access_count;
 
         $this->request->merge([

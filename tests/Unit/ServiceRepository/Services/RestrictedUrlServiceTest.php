@@ -38,12 +38,12 @@ class RestrictedUrlServiceTest extends BaseTestCase {
     public function testGetRestrictedUrlByKeySucceeds(): void
     {
         $restricted_url = $this->createRestrictedUrl();
-        $key = $restricted_url->key;
+        $key = $restricted_url->route_key;
 
         $restricted_url_by_key = RestrictedUrlService::getRestrictedUrlByKey($key);
 
         $this->assertInstanceOf(RestrictedUrl::class, $restricted_url_by_key);
-        $this->assertEquals($key, $restricted_url_by_key->key);
+        $this->assertEquals($key, $restricted_url_by_key->route_key);
     }
 
     private function createRestrictedUrl()

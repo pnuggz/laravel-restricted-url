@@ -17,7 +17,7 @@ class RestrictedUrl extends BaseModel
     protected $fillable = [
         'user_id',
         'route_name',
-        'key',
+        'route_key',
         'expires_at',
         'access_limit',
         'access_count',
@@ -37,6 +37,6 @@ class RestrictedUrl extends BaseModel
     public function getRestrictedUrlString(Array $params = [])
     {
         $params['user'] = $this->user_id;
-        return route($this->route_name, $params) . '?restricted_url_key=' . $this->key;
+        return route($this->route_name, $params) . '?restricted_url_key=' . $this->route_key;
     }
 }
