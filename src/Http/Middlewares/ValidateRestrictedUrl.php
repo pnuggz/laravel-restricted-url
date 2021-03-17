@@ -53,7 +53,7 @@ class ValidateRestrictedUrl
          */
         $auth = $request->get('auth', []);
         $auth_user = Arr::get($auth, 'user');
-        if (!$auth_user || $auth_user->id != $restricted_url->user_id) {
+        if (!$auth_user || Arr::get($auth_user, 'id') != $restricted_url->user_id) {
             return $this->returnErrorResponse(
                 'key_invalid',
                 'The restricted url key is invalid',
@@ -82,7 +82,7 @@ class ValidateRestrictedUrl
             );
         }
 
-        $update_response = RestrictedUrlService::setRestrictedUrlAccessCountWithUser($restricted_url, $auth_user->id, $request->ip());
+        $update_response = RestrictedUrlService::setRestrictedUrlAccessCountWithUser($restricted_url, Arr::get($auth_user, 'id'), $request->ip());
         if ($update_response instanceof MessageBag) {
             return $this->returnErrorResponse(
                 'internal_server_error',
